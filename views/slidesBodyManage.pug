@@ -1,0 +1,55 @@
+extends layout
+
+include mixinMenu
+include mixinAlertInfo
+
+block content
+  .min-vh-100
+    include adminNavbar
+    .container-fluid
+      .row
+        +mixinMenu(baseUrl)
+        main(role="main" class="col-10 bg-white content ml-sm-auto px-3 pt-3")
+          h2(class="h4 mb-3")= msgPageName
+          form(action= actionSubmit method='post')
+            .row
+              .col
+                .form-group
+                  label(for='name') Название слайда*
+                  input(id="name" name='name' value= slide.name class="form-control form-control-sm" required)
+              .col
+                .form-group
+                  label(for="time") Время показа слайда (секунд)*
+                  input(id="time" name='time' type="number" min=0 value= slide.time class="form-control form-control-sm" required)
+            .row
+              .col
+                .form-group
+                  label(for='titlePurchase') Заголовок над валютой покупки*
+                  input(id='titlePurchase' name='titlePurchase' value= slide.title_purchase class="form-control form-control-sm" required)
+              .col
+                .form-group
+                  label(for='titleSale') Заголовок над валютой продажи*
+                  input(id="titleSale" name='titleSale' value= slide.title_sale class="form-control form-control-sm" required)
+            
+            label Выбор валют для отображения на слайде
+            div(class='card mb-3')
+              div(class='card-body h-200px overflow-auto')
+                if currencies.length > 0
+                  each currency in currencies
+                    div(class="custom-control custom-checkbox mb-1 no-margin-last-child")
+                      input(
+                        type="checkbox"
+                        class="custom-control-input"
+                        name="currency"
+                        checked= currency.checked
+                        value= currency.id
+                        id= `${currency.currency_sale}/${currency.currency_purchase}`)
+                      label(
+                        class="custom-control-label"
+                        for= `${currency.currency_sale}/${currency.currency_purchase}`)= `${currency.currency_sale}/${currency.currency_purchase}`
+                  else
+                    +mixinAlertInfo('В системе нет не одной валюты')
+
+            div(class="w-100 text-right")
+              a(href= actionBack class="btn btn-sm btn-outline-secondary mr-3") Назад
+              input(type='submit' class="btn btn-sm btn-success" value= msgCreateBtn)

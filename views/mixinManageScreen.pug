@@ -1,0 +1,33 @@
+mixin mixinManageScreen(screen, brands, cashboxes, actionBack, msgCreateBtn)
+    div(class='card')
+        div(class='card-header') Общая информация
+        div(class='card-body')
+          .row
+            .col
+              .form-group
+                label(for='name') Название экрана*
+                input(id="name" name='name' value= screen.name class="form-control form-control-sm" required)
+            .col
+              .form-group
+                label(for="brandId") Бренд*
+                select(id="brandId" name="brandId" class="form-control form-control-sm")
+                  each brand in brands 
+                    option(selected=(screen.id_brand == brand.id) value= brand.id)= brand.name
+            .col
+              .form-group
+                label(for="cashboxId") Касса*
+                select(id="cashboxId" name="cashboxId" class="form-control form-control-sm")
+                  each cashbox in cashboxes 
+                    option(selected=(screen.id_cashbox == cashbox.id) value= cashbox.id)= cashbox.name
+          hr
+          .form-group
+            label(for="footerHeight") Высота низа экрана в процентах*
+            input(id="footerHeight" name='footerHeight' type="number" min=0 value= screen.footer_height class="form-control form-control-sm" required)
+
+          div(class='form-group my-3')
+            div(class="custom-control custom-checkbox")
+              input(type="checkbox" name="showFooter" class="custom-control-input" id="showFooter" checked=screen.show_footer)
+              label(class="custom-control-label" for="showFooter") Показывать низ курсовки
+          div(class="w-100 text-right")
+            a(href= actionBack class="btn btn-sm btn-outline-secondary mr-3") Назад
+            input(type='submit' class="btn btn-sm btn-success" value= msgCreateBtn)

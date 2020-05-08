@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  include modalDelete
+  include mixinAlertInfo
+  include mixinMenu
+
+  div(class='min-vh-100')
+    include adminNavbar
+    div(class="container-fluid")
+      div(class="row")
+        +mixinMenu(baseUrl)
+        main(role="main" class="col-10 bg-white content ml-sm-auto px-3 pt-3")
+          div(class='row mb-3 align-items-center')
+            div(class='col-8')
+              h2(class="h4")= msgPageName
+            div(class='col-4 text-right')
+              a(href= actionCreate role="button" class="btn btn-success btn-sm")= msgAddBtn
+          if slides.length > 0
+            table(class="table table-hover") 
+              thead
+                tr
+                  th Название слайда
+                  th
+              tbody
+                each slide in slides
+                  tr
+                    td= slide.name
+                    td(class="text-right")                  
+                      a(href= `${actionUpdate}/${slide.id}` role="button" class="btn btn-primary btn-sm mr-3")
+                        i(class="icon icon-edit")
+                      button(
+                        type="button"
+                        class=`btn btn-sm btn-danger ${modalClassDelete}`
+                        data-toggle="modal"
+                        data-target="#modalDelete"
+                        data-id=slide.id
+                        data-name=slide.name
+                      )
+                        i(class="icon icon-delete")
+          else
+            +mixinAlertInfo(msgNoData)                  
+            

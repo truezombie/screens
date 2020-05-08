@@ -1,0 +1,51 @@
+extends layout
+
+include mixinMenu
+include mixinAlertInfo
+
+block content
+  div(class='min-vh-100')
+    include modalDelete
+    include adminNavbar
+    div(class="container-fluid")
+      div(class="row")
+        +mixinMenu(baseUrl)
+        main(role="main" class="col-10 bg-white content ml-sm-auto px-3 pt-3")
+            h2(class="h4 mb-3")= pageName
+            div(class="card mb-3")
+              div(class="card-body")
+                form(action=submitLink id="modalCityScreenForm" method="post" enctype="multipart/form-data")
+                  div(class="custom-file")
+                    input(type="file" id="uploadImageInput" class="images-upload-input custom-file-input" name="picture")
+                    label(id="uploadImageLabel" class="images-upload-label custom-file-label" for="uploadImageInput") Кликните для выбора картинки
+                  div(class="text-right mt-3")
+                    input(type='submit' class="btn btn-sm btn-success" value="Загрузить")
+            if pictures.length > 0
+              table(class="table table-hover")
+                thead
+                  tr
+                    th Картинка
+                    th Название
+                    td
+                tbody
+                  each picture in pictures
+                    tr
+                      td
+                        img(alt=picture.real_name src=picturesPath + picture.name class="admin-image-ico")
+                      td(class="table-cell-middle")=picture.real_name
+                      td(class="table-cell-middle" align="right")
+                        a(href="/pictures/update/" + picture.id role="button" class="btn btn-primary btn-sm mr-3")
+                          i(class="icon icon-edit")
+                        button(
+                          type="button"
+                          class="btn-open-delete-picture-modal btn btn-danger btn-sm"
+                          data-toggle="modal"
+                          data-target="#modalDelete"
+                          data-id=picture.id
+                          data-name=picture.real_name
+                          data-system-name=picture.name
+                        )
+                          i(class="icon icon-delete")
+            else
+              +mixinAlertInfo('На данный момент не загружена не одна картинка')
+                

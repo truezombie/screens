@@ -1,0 +1,16 @@
+extends layout
+
+block scripts
+    script(src='/javascripts/screen.js')
+
+block content
+    header(
+        class="screen-header overflow-hidden"
+        style={'background-color': brand.header_color_bg, 'height': `${heightHeader}%`})
+    main(
+        class="screen-main overflow-hidden"
+        style={'background-color': brand.body_color_bg, 'height': `${heightBody}%`})
+    if showFooter
+        footer(
+            class="screen-footer overflow-hidden"
+            style={'background-color': brand.footer_color_bg, 'height': `${heightFooter}%`})

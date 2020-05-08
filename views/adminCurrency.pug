@@ -1,0 +1,46 @@
+extends layout
+
+include mixinMenu
+
+block content
+  include modalDelete
+
+  div(class='min-vh-100')
+    include adminNavbar
+    div(class="container-fluid")
+      div(class="row")
+        +mixinMenu(baseUrl)
+        main(role="main" class="col-10 bg-white content ml-sm-auto px-3 pt-3")
+          div(class='row mb-3 align-items-center')
+            div(class='col-8')
+              h2(class="h4")= pageName
+            div(class='col-4 text-right')
+              a(href="/currencies/create" role="button" class="btn btn-success btn-sm") Добавить валюты
+      
+          if currencies.length > 0
+            table(class="table table-hover") 
+              thead
+                tr
+                  th В валюту
+                  th С валюты
+                  th
+              tbody
+                each currency in currencies
+                  tr
+                    td= currency.currency_sale
+                    td= currency.currency_purchase
+                    td(class="text-right")
+                      a(href="/currencies/update/" + currency.id role="button" class="btn btn-primary btn-sm mr-3")
+                        i(class="icon icon-edit")
+                      button(
+                        type="button"
+                        class="btn-open-delete-currency-modal btn btn-danger btn-sm"
+                        data-toggle="modal"
+                        data-target="#modalDelete"
+                        data-id=currency.id
+                        data-sale= currency.currency_sale
+                        data-purchase= currency.currency_purchase
+                      )
+                        i(class="icon icon-delete")
+          else
+            +mixinAlertInfo(withoutCashboxes)

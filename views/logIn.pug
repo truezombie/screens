@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    div(class='vw-100 vh-100 d-flex')
+        div(class='container mt-5')
+            div(class="w-100 d-flex justify-content-center")
+                div(class="col-md-6 col-lg-4 col-xl-4 card pt-3")
+                    form(action="/cashboxes", method="post")
+                        div(class="form-group")
+                            label(for="logIn") Логин*
+                            input(name='username' class="form-control form-control" id="logIn" aria-describedby="logIn" type="text" required)
+                        div(class="form-group")
+                            label(for="password") Пароль*
+                            input(name='password' class="form-control form-control" id="password" aria-describedby="password" type="password" required)
+                        div(class="form-group")
+                            input(class="btn btn-primary btn btn-block" type="submit" value="Войти")

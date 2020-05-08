@@ -1,0 +1,30 @@
+mixin mixinMenu(baseUrl)
+  nav(class="col-2 px-0 d-md-block bg-light sidebar")
+    div(class="sidebar-sticky pt-3 px-3")
+      p(class="mb-3 text-muted text-uppercase h6") Управление
+      ul(class="nav nav-pills flex-column mb-3")
+        each val in [{ link: '/cashboxes', name: 'Кассы'}, { link: '/brands', name: 'Бренды'}, { link: '/screens', name: 'Экраны'}]
+          li(class="nav-item")
+            a(
+              class={
+                "nav-link active": baseUrl === val.link, 
+                "nav-link": baseUrl !== val.link, } 
+              href= val.link)= val.name
+      p(class="text-muted text-uppercase h6") Слайды
+      ul(class="nav nav-pills flex-column mb-3")
+        each val in [{ link: '/slides-header', name: 'Верх'}, { link: '/slides-body', name: 'Средина'}, { link: '/slides-footer', name: 'Низ'}]
+          li(class="nav-item")
+            a(
+              class={
+                "nav-link active": baseUrl === val.link, 
+                "nav-link": baseUrl !== val.link, } 
+              href= val.link)= val.name
+      p(class="text-muted text-uppercase h6") Ресурсы
+      ul(class="nav nav-pills flex-column mb-3")
+        each val in [{ link: '/pictures', name: 'Картинки'}, { link: '/currencies', name: 'Валюты'}]
+          li(class="nav-item")
+            a(
+              class={
+                "nav-link active": baseUrl === val.link, 
+                "nav-link": baseUrl !== val.link, } 
+              href= val.link)= val.name

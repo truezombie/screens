@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  include modalDelete
+  include mixinMenu
+  include mixinAlertInfo
+
+  div(class='min-vh-100')
+    include adminNavbar
+    div(class="container-fluid")
+      div(class="row")
+        +mixinMenu(baseUrl)
+        main(role="main" class="col-md-10 bg-white content ml-sm-auto px-3 pt-3")
+          div(class='row mb-3 align-items-center')
+            div(class='col-8')
+              h2(class="h4")= pageName
+            div(class='col-4 text-right')
+              a(href="/cashboxes/create" role="button" class="btn btn-success btn-sm") Добавить кассу
+          if cashboxes.length > 0
+            table(class="table table-hover") 
+              thead
+                tr
+                  th Название кассы
+                  th
+              tbody
+                each cashbox in cashboxes
+                  tr
+                    td= cashbox.name
+                    td(class="text-right")
+                      a(href="/cashboxes/update/" + cashbox.id role="button" class="btn btn-primary btn-sm mr-3")
+                        i(class="icon icon-edit")
+                      button(
+                        type="button"
+                        class="btn-open-delete-city-modal btn btn-danger btn-sm"
+                        data-toggle="modal"
+                        data-target="#modalDelete"
+                        data-id=cashbox.id
+                        data-name=cashbox.name
+                      )
+                        i(class="icon icon-delete")
+          else
+            +mixinAlertInfo(withoutCashboxes)                  

@@ -1,0 +1,73 @@
+extends layout
+
+include mixinMenu
+include mixinAlertInfo
+
+block content
+    .min-vh-100
+        include adminNavbar
+        .container-fluid
+            .row
+                +mixinMenu(baseUrl)
+                main(role="main" class="col-10 bg-white content ml-sm-auto px-3 pt-3")
+                    h2(class="h4 mb-3")= msgPageName
+                    form(action= actionSubmit method='post')
+                        input(type="hidden" name="screenId" class="custom-control-input" value= currentSlide.id_screen)
+                        .row
+                             .col
+                                .form-group
+                                    label(for="slideId") Слайд*
+                                    select(id="slideId" name="slideId" class="form-control form-control-sm")
+                                        each slide in slides
+                                            option(selected=(currentSlide.id_slide == slide.id) value= slide.id)= slide.name
+                        .row
+                            .col
+                                .form-group
+                                    label(for='sizeTitles') Размер заголовков над валютой*
+                                    input(
+                                        id="sizeTitles"
+                                        name='sizeTitles'
+                                        type="number"
+                                        min=0
+                                        step="any"
+                                        value= currentSlide.size_titles
+                                        class="form-control form-control-sm"
+                                        required
+                                    )
+                            .col
+                                .form-group
+                                    label(for='sizeCurrencyRows') Размер шрифта строки валют*
+                                    input(
+                                        id="sizeCurrencyRows"
+                                        name='sizeCurrencyRows'
+                                        type="number"
+                                        min=0
+                                        step="any"
+                                        value= currentSlide.size_currency_rows
+                                        class="form-control form-control-sm"
+                                        required
+                                    )
+                            .col
+                                .form-group
+                                    label(for='sizeImage') Коэфициент увеличения размера флага*
+                                    input(
+                                        id="sizeImage"
+                                        name='sizeImage'
+                                        type="number"
+                                        min=0
+                                        step="any"
+                                        value= currentSlide.size_img
+                                        class="form-control form-control-sm"
+                                        required
+                                    )
+                        .form-group
+                            div(class="custom-control custom-checkbox")
+                                input(disabled= disabledCheckboxMakeMain type="checkbox" name="mainSlide" class="custom-control-input" id="mainSlide" checked= currentSlide.is_main)
+                                label(class="custom-control-label" for="mainSlide")= `Главный слайд ${disabledCheckboxMakeMain ? '(у вас уже есть главный слайд для этой курсовки)': ''}`
+                        .form-group
+                            div(class="custom-control custom-checkbox")
+                                input(type="checkbox" name="showSlide" class="custom-control-input" id="showSlide" checked= currentSlide.show_slide)
+                                label(class="custom-control-label" for="showSlide") Показывать слайд
+                        div(class="w-100 text-right")
+                            a(href= actionBack class="btn btn-sm btn-outline-secondary mr-3") Назад
+                            input(type='submit' class="btn btn-sm btn-success" value= msgCreateBtn)

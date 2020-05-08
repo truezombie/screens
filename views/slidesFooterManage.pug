@@ -1,0 +1,44 @@
+extends layout
+
+include mixinMenu
+include mixinAlertInfo
+
+block content
+  div(class='min-vh-100')
+    include adminNavbar
+    div(class="container-fluid")
+      div(class="row")
+        +mixinMenu(baseUrl)
+        main(role="main" class="col-10 bg-white content ml-sm-auto px-3 pt-3")
+          h2(class="h4 mb-3")= msgPageName
+          form(action= actionSubmit method='post')
+            .row
+              .col
+                .form-group
+                  label(for='name') Название слайда*
+                  input(id="name" name='name' value= slide.name class="form-control form-control-sm" required)
+              .col
+                .form-group
+                  label(for="typeId") Тип нового слайда*
+                  select(id="typeId" name="typeId" class="form-control form-control-sm")
+                    each slideType in types 
+                      option(selected=(slide.id_type == slideType.id) value= slideType.id)= slideType.name
+              .col
+                .form-group
+                  label(for="time") Время показа слайда (секунд)*
+                  input(id="time" name='time' type="number" min=0 value= slide.time class="form-control form-control-sm" required)
+            hr
+            .row
+              .col
+                .from-group 
+                  label(for='text') Текст слайда*
+                  input(id="text" name='text' value= slide.text class="form-control form-control-sm" required)
+              .col
+                .form-group
+                  label(for="pictureId") Выбор картинки*
+                  select(id="pictureId" name="pictureId" class="form-control form-control-sm")
+                    each picture in pictures 
+                      option(selected=(slide.id_picture == picture.id) value= picture.id)= picture.real_name
+            div(class="w-100 text-right")
+              a(href= actionBack class="btn btn-sm btn-outline-secondary mr-3") Назад
+              input(type='submit' class="btn btn-sm btn-success" value= msgCreateBtn)

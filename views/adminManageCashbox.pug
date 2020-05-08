@@ -1,0 +1,26 @@
+extends layout
+
+include mixinMenu
+
+block content
+  div(class='min-vh-100')
+    include adminNavbar
+    div(class="container-fluid")
+      div(class="row")
+        +mixinMenu(baseUrl)
+        main(role="main" class="col-10 bg-white content ml-sm-auto px-3 pt-3")
+          h2(class="h4 mb-3")= pageName
+          form(action= submitLink method='post')
+            div(class='row')
+              div(class='col')
+                div(class='form-group')
+                  label(for='modalCityEditFormInputCity') Название кассы*
+                  input(id="modalCityEditFormInputCity" name='name' value= name class="form-control form-control-sm" required)
+              div(class='col')
+                div(class='form-group')
+                    label(for='modalCityEditFormInputSpreadsheet') Ссылка на Google таблицу*
+                    input(id="modalCityEditFormInputSpreadsheet" name='spreadsheet' value= spreadsheet class="form-control form-control-sm" required)
+            div(class="w-100 text-right")
+              a(href= backLink class="btn btn-sm btn-outline-secondary mr-3") Назад
+              input(type='submit' class="btn btn-sm btn-success" value="Сохранить")
+

@@ -1,0 +1,122 @@
+extends layout
+
+include mixinMenu
+include mixinAlertInfo
+
+block content
+  div(class='min-vh-100')
+    include adminNavbar
+    div(class="container-fluid")
+      div(class="row")
+        +mixinMenu(baseUrl)
+        main(role="main" class="col-10 bg-white content ml-sm-auto px-3 pt-3")
+          h2(class="h4 mb-3")= msgPageName
+          form(action= submitLink method='post')
+            .row
+              .col
+                .form-group
+                  label(for='name') Название бренда*
+                  input(id="name" name='name' value= brand.name class="form-control form-control-sm" required)
+            hr
+            .row
+              .col-6
+                .form-group
+                  label(for='headerColorBg') Фон верха курсовки*
+                  input(
+                    id="headerColorBg"
+                    data-color= brand.header_color_bg
+                    name='headerColorBg'
+                    value= brand.header_color_bg
+                    class="form-control form-control-sm colorpicker"
+                    required)
+              .col-6
+                .form-group
+                  label(for='headerColorText') Цвет текста верха курсовки*
+                  input(
+                    id="headerColorText"
+                    data-color= brand.header_color_text
+                    name='headerColorText'
+                    value= brand.header_color_text
+                    class="form-control form-control-sm colorpicker"
+                    required)
+            hr
+            .row
+              .col-12
+                .form-group
+                  label(for='bodyColorBg') Фон средины курсовки*
+                  input(
+                    id="bodyColorBg"
+                    data-color= brand.body_color_bg
+                    name='bodyColorBg'
+                    value= brand.body_color_bg
+                    class="form-control form-control-sm colorpicker"
+                    required)
+              .col-6
+                .form-group
+                  label(for='bodyColorTextPurchase') Цвет заголовка над покупаемой валюты*
+                  input(
+                    id="bodyColorTextPurchase"
+                    data-color= brand.body_color_text_purchase
+                    name='bodyColorTextPurchase'
+                    value= brand.body_color_text_purchase
+                    class="form-control form-control-sm colorpicker"
+                    required)
+              .col-6
+                .form-group
+                  label(for='bodyColorTextSale') Цвет заголовка над продаваемой валюты*
+                  input(
+                    id="bodyColorTextSale"
+                    data-color= brand.body_color_text_sale
+                    name='bodyColorTextSale'
+                    value= brand.body_color_text_sale
+                    class="form-control form-control-sm colorpicker"
+                    required)
+              .col-6
+                .form-group
+                  label(for='bodyColorValues') Цвет значений валюты*
+                  input(
+                    id="bodyColorValues"
+                    data-color= brand.body_color_values
+                    name='bodyColorValues'
+                    value= brand.body_color_values
+                    class="form-control form-control-sm colorpicker"
+                    required)
+              .col-6
+                .form-group
+                  label(for='bodyColorCurrencies') Цвет названий валюты*
+                  input(
+                    id="bodyColorCurrencies"
+                    data-color= brand.body_color_currencies
+                    name='bodyColorCurrencies'
+                    value= brand.body_color_currencies
+                    class="form-control form-control-sm colorpicker"
+                    required)
+            hr
+            .row
+              .col-6
+                .form-group
+                  label(for='footerColorBg') Фон низа курсовки*
+                  input(
+                    id="footerColorBg"
+                    data-color= brand.footer_color_bg
+                    name='footerColorBg'
+                    value= brand.footer_color_bg
+                    class="form-control form-control-sm colorpicker"
+                    required)
+              .col-6
+                .form-group
+                  label(for='footerColorText') Цвет текста низа курсовки*
+                  input(
+                    id="footerColorText"
+                    data-color= brand.footer_color_text
+                    name='footerColorText'
+                    value= brand.footer_color_text
+                    class="form-control form-control-sm colorpicker"
+                    required)
+            div(class="w-100 text-right")
+              a(href= backLink class="btn btn-sm btn-outline-secondary mr-3") Назад
+              input(type='submit' class="btn btn-sm btn-success" value="Сохранить")
+
+
+
+

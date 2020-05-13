@@ -128,4 +128,6 @@ html {
 
 .footer-slide-type-3 img {
   max-width: 40%;
+  max-height: 90%;
+  margin-left: 2%;
 }

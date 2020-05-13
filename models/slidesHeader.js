@@ -94,7 +94,7 @@ const updateHeaderSlide = async (req, res) => {
       pictures,
       baseUrl: req.baseUrl,
       msgPageName: `Изменение слайда "${slides[0].name}" для верха курсовки`,
-      msgCreateBtn: 'Создать слайд',
+      msgCreateBtn: 'Сохранить',
       actionSubmit: `/slides-header/update/${slides[0].id}`,
       actionBack: '/slides-header',
     });

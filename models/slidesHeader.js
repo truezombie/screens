@@ -11,7 +11,8 @@ const getAllSlides = async (req, res) => {
     res.render('slidesTemplate', {
       slides,
       baseUrl: req.baseUrl,
-      modalClassDelete: 'btn-open-delete-header-slide-modal',
+      modalClassDelete: 'btn-open-delete-slide-modal',
+      actionDelete: '/slides-header/delete',
       actionCreate: '/slides-header/create',
       actionUpdate: '/slides-header/update',
       msgPageName: 'Слайды верха курсовки',

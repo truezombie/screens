@@ -119,4 +119,16 @@ $(document).ready(function () {
 
     setModalData(msgModalTitle, msgModalBody, formAction);
   });
+
+  $('.btn-open-delete-slide-modal').on('click', function () {
+    const id = $(this).data('id');
+    const name = $(this).data('name');
+    const actionLink = $(this).data('action-link');
+
+    const msgModalTitle = `Удаление слайда "${name}"`;
+    const msgModalBody = `<p>Вы уверенны, что хотите удалить слайд "${name}" ?<p>`;
+    const formAction = `${actionLink}/${id}`;
+
+    setModalData(msgModalTitle, msgModalBody, formAction);
+  });
 });

@@ -13,7 +13,8 @@ const getAllSlides = async (req, res) => {
     res.render('slidesTemplate', {
       slides,
       baseUrl: req.baseUrl,
-      modalClassDelete: 'btn-open-delete-body-slide-modal',
+      modalClassDelete: 'btn-open-delete-slide-modal',
+      actionDelete: '/slides-body/delete',
       actionCreate: '/slides-body/create',
       actionUpdate: '/slides-body/update',
       msgPageName: 'Слайды средины курсовки',

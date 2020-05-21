@@ -121,6 +121,9 @@ const reloadPage = (req, res, next) => {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/', (req, res) => {
+  res.redirect('/cashboxes');
+});
 app.use('/screen', screenRouter);
 app.use('/login', logInRouter);
 app.use('/logout', logOutRouter);
@@ -132,9 +135,6 @@ app.use('/slides-header', checkUser, reloadPage, slidesHeader);
 app.use('/slides-body', checkUser, reloadPage, slidesBody);
 app.use('/slides-footer', checkUser, reloadPage, slidesFooter);
 app.use('/screens', checkUser, reloadPage, adminScreen);
-app.get('/', (req, res) => {
-  res.redirect('/cashboxes');
-});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

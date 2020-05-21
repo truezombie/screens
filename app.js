@@ -95,6 +95,14 @@ const checkUser = (req, res, next) => {
   }
 };
 
+const loggedIn = (req, res, next) => {
+  if (req.session.loggedIn) {
+    res.redirect('/cashboxes');
+  } else {
+    next();
+  }
+};
+
 const serverWs = new WebSocket.Server({ port: 4000 });
 const WS_RELOAD_STATUS = 'RELOAD';
 
@@ -125,8 +133,8 @@ app.get('/', (req, res) => {
   res.redirect('/cashboxes');
 });
 app.use('/screen', screenRouter);
-app.use('/login', logInRouter);
 app.use('/logout', logOutRouter);
+app.use('/login', loggedIn, logInRouter);
 app.use('/pictures', checkUser, picture);
 app.use('/cashboxes', checkUser, reloadPage, cashbox);
 app.use('/currencies', checkUser, reloadPage, currency);

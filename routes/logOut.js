@@ -4,6 +4,7 @@ const router = express.Router();
 
 router.get('/', async (req, res, next) => {
   if (req.session) {
+    req.session.loggedIn = false;
     req.session.destroy((err) => {
       if (err) {
         next(err);

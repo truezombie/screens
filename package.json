@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon ./bin/www",
+    "start:dev": "nodemon ./bin/www",
     "lint": "eslint --ext=.js ./",
     "lint:fix": "eslint --ext=.js ./ --fix",
     "start": "node ./bin/www"
@@ -28,6 +28,7 @@
     "pg-format": "^1.0.4",
     "pug": "2.0.0-beta11",
     "ramda": "^0.26.1",
+    "serve-favicon": "^2.5.0",
     "spectrum-colorpicker2": "^2.0.0",
     "ws": "^7.2.5"
   },

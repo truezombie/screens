@@ -112,7 +112,7 @@ $(document).ready(function () {
   $('.btn-open-delete-screen-modal').on('click', function () {
     const id = $(this).data('id');
     const name = $(this).data('name');
-    
+
     const msgModalTitle = `Удаление экрана "${name}"`;
     const msgModalBody = `<p>Вы уверенны, что хотите удалить экран "${name}" ?<p>`;
     const formAction = `screens/delete/${id}`;

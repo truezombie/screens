@@ -7,6 +7,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
+const favicon = require('serve-favicon');
 const {
   adminScreen,
   cashbox,
@@ -22,6 +23,8 @@ const logInRouter = require('./routes/logIn');
 const logOutRouter = require('./routes/logOut');
 
 const app = express();
+
+app.use(favicon(path.join(__dirname, 'public', './images/favicon.png')));
 
 app.use(
   '/bootstrap.min.css',

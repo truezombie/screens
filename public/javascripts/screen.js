@@ -481,7 +481,7 @@ const renderSlidesBody = (
     const mainSlide = slides.find((body) => body.is_main);
     const bodySlides = [];
 
-    if (slides.length > 1) {
+    if (slides.length >= 2) {
       slides.forEach((item) => {
         if (!item.is_main) {
           mainSlide !== -1
@@ -490,18 +490,20 @@ const renderSlidesBody = (
         }
       });
     } else {
-      bodySlides.push(0);
+      bodySlides.push(slides[0]);
     }
 
-    fetchBodySlidesData(googleSheet, bodySlides).then((data) => {
-      getSlides(data, brand, getTemplate, node, animations);
-    });
-
-    setInterval(() => {
+    if (bodySlides.length !== 0 && googleSheet) {
       fetchBodySlidesData(googleSheet, bodySlides).then((data) => {
         getSlides(data, brand, getTemplate, node, animations);
       });
-    }, getArrSum(bodySlides, 'time') * 1000);
+
+      setInterval(() => {
+        fetchBodySlidesData(googleSheet, bodySlides).then((data) => {
+          getSlides(data, brand, getTemplate, node, animations);
+        });
+      }, getArrSum(bodySlides, 'time') * 1000);
+    }
   }
 };
 

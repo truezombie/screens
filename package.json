@@ -30,7 +30,7 @@
     "ramda": "^0.26.1",
     "serve-favicon": "^2.5.0",
     "spectrum-colorpicker2": "^2.0.0",
-    "ws": "^7.2.5"
+    "ws": "^7.4.6"
   },
   "devDependencies": {
     "cross-env": "^7.0.0",
